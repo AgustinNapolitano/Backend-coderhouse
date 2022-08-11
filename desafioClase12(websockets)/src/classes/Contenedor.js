@@ -3,7 +3,7 @@ import __dirname from '../utils.js';
 
 const prodUrl = __dirname+'/files/products.txt'
 
-class Contendor{
+class Contenedor{
     async registrarProd(prod){
         try{
             let data = await fs.promises.readFile(prodUrl,'utf-8');
@@ -115,4 +115,4 @@ class Contendor{
 
 }
 
-export default Contendor;
+export default Contenedor;

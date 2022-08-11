@@ -6,12 +6,12 @@ import productsRouter from './routes/products.js';
 import upload from './services/uploader.js';
 import __dirname from './utils.js';
 import {Server, Socket} from 'socket.io';
-import Contendor from './classes/Contenedor.js';
+
 
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const contenedor = new Contendor();
+const contenedor = new Contenedor();
 
 const server = app.listen(PORT,()=>{
     console.log("Listening on port: ",PORT)
@@ -34,7 +34,7 @@ app.use('/api/products',productsRouter);
 
 app.post('/api/products',(req,res)=>{
     let prodId = parseInt(req.body.pid);
-    contendor.registrarProd(prodId).then(result=>{
+    contenedor.registrarProd(prodId).then(result=>{
         res.send(result);
     })
 })
@@ -48,7 +48,7 @@ app.post('/api/uploadfile',upload.fields([
 ]),(req,res)=>{
     const files = req.files;
     console.log(files);
-    if(!files||files.lenght===0){
+    if(!files||files.length===0){
         res.status(500).send({message:"No se subió el archivo."})
     }
     res.send(files);
@@ -66,7 +66,7 @@ app.get('/view/products',(req,res)=>{
 
 io.on('connection', async socket=>{
     console.log(`El socket ${socket.id} se ha conectado`)
-    let products = await contendor.getAll();
+    let products = await contenedor.getAll();
     socket.emit('getProd',products);
 })
 
