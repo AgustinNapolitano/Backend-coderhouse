@@ -18,6 +18,30 @@ const server = app.listen(PORT,()=>{
 })
 export const io = new Server(server);
 
+
+// Inicio de Middleware -->
+let isLogin = () => true;
+
+let logger = (req, res, next) => {
+    console.log('Peticion de tipo: ', req.method);
+    next();
+}
+
+let showIP = (req, res, next) => {
+    console.log('IP: XXX.X.X.X.');
+};
+
+
+app.use((req, res, next)=>{
+    if(isLogin()){
+        next();
+    }else{
+        res.send('No estás autorizado.')
+    }
+}, logger, showIP);
+
+// Fin de Middleware
+
 app.engine('handlebars',engine());
 app.set('views',__dirname+'/views')
 app.set('view engine','handlebars')

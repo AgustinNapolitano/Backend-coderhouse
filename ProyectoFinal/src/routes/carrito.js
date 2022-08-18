@@ -1,11 +1,11 @@
-/*import express from 'express';
+import express from 'express';
 import Contenedor from '../classes/Contenedor';
 
 
 const router = express.Router();
 const contenedor = new Contenedor();
 
-
+//GET
 router.get('/',(req,res)=>{
     contenedor.getAll().then(result=>{
         res.send(result);
@@ -17,7 +17,7 @@ router.get('/:pid',(req,res)=>{
         res.send(result);
     })
 })
-
+//POST
 router.post('/',upload.single('thumbnail'),(req,res)=>{
     let file = req.file;
     let prod = req.body;
@@ -33,7 +33,7 @@ router.post('/',upload.single('thumbnail'),(req,res)=>{
     })
 })
 
-
+//PUT
 router.put('/:pid',(req,res)=>{
     let body = req.body;
     let id = parseInt(req.params.pid);
@@ -48,4 +48,4 @@ router.delete('/:pid',(req,res)=>{
         res.send(result)
     })
 })
-export default router;*/
+export default router;
